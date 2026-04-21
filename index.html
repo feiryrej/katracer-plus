@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tracer</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="icon" type="image/x-icon" href="assets/images/logo.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400&family=Noto+Sans+JP:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="cursor-dot"></div>
+    <div id="cursor-ring"></div>
+    <div id="petals-container"></div>
+
+    <div id="top-controls">
+      <button id="theme-btn" title="Toggle Dark Mode">🌙</button>
+      <button id="music-btn" title="Toggle Music">🎵</button>
+    </div>
+
+    <audio id="bg-music" loop>
+      <source src="assets/sounds/bgm.mp3" type="audio/mpeg" />
+    </audio>
+    <audio id="sfx-save" src="assets/sounds/correct.mp3"></audio>
+    <audio id="sfx-click" src="assets/sounds/click.mp3"></audio>
+    <audio id="sfx-stroke" src="assets/sounds/click.mp3"></audio>
+
+    <div id="pages-wrapper">
+      <!-- ===== HOME ===== -->
+      <section id="page-home" class="page active">
+        <div class="home-content">
+          <div class="home-badge">✿ 日本語 ✿</div>
+          <h1 class="home-title">かなトレース</h1>
+          <p class="home-subtitle">Kana Trace</p>
+          <p class="home-desc">
+            Practice hiragana & katakana<br />one stroke at a time
+          </p>
+          <div class="home-buttons">
+            <button class="btn-main" onclick="navigate('page-trace')">
+              Start Tracing
+            </button>
+            <button
+              class="btn-main btn-outline"
+              onclick="navigate('page-gallery')"
+            >
+              My Gallery
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== TRACE ===== -->
+      <section id="page-trace" class="page">
+        <div class="page-header">
+          <button class="btn-back" onclick="navigate('page-home')">
+            ← back
+          </button>
+          <h2>✿ Trace Mode ✿</h2>
+          <button class="btn-gallery-link" onclick="navigate('page-gallery')">
+            Gallery
+          </button>
+        </div>
+
+        <div class="trace-container">
+          <!-- Script tabs -->
+          <div class="trace-tabs">
+            <button
+              class="tab-btn active"
+              onclick="setTraceScript('hiragana', this)"
+            >
+              ひらがな Hiragana
+            </button>
+            <button class="tab-btn" onclick="setTraceScript('katakana', this)">
+              カタカナ Katakana
+            </button>
+            <button class="tab-btn" onclick="setTraceScript('words', this)">
+              単語 Words
+            </button>
+          </div>
+
+          <!-- Character picker grid -->
+          <div class="trace-char-picker" id="trace-char-picker"></div>
+
+          <!-- Word mode controls (hidden unless word mode) -->
+          <div
+            class="word-mode-controls"
+            id="word-mode-controls"
+            style="display: none"
+          >
+            <select id="word-level-select" onchange="loadWordLevel()">
+              <option value="5">N5 · Beginner</option>
+              <option value="4">N4 · Elementary</option>
+              <option value="3">N3 · Intermediate</option>
+              <option value="2">N2 · Advanced</option>
+              <option value="1">N1 · Expert</option>
+            </select>
+            <button class="btn-secondary" onclick="nextWord()">
+              次の単語 ↻
+            </button>
+          </div>
+
+          <!-- Main trace area -->
+          <div class="trace-main">
+            <!-- Left: info + word suggestions -->
+            <div class="trace-info-panel">
+              <div class="trace-big-char" id="trace-display">あ</div>
+              <div class="trace-romaji" id="trace-romaji">a</div>
+              <div class="trace-group" id="trace-group">Hiragana · Vowel</div>
+
+              <div class="word-suggestions">
+                <p class="ws-label">Words using this sound</p>
+                <div class="ws-list" id="ws-list"></div>
+              </div>
+            </div>
+
+            <!-- Center: canvas -->
+            <div class="canvas-col">
+              <div class="canvas-wrapper">
+                <canvas id="trace-canvas" width="320" height="320"></canvas>
+              </div>
+              <div class="canvas-hint">Draw the character above ↑</div>
+              <div class="trace-controls">
+                <button class="btn-secondary" onclick="clearCanvas()">
+                  ✕ Clear
+                </button>
+                <button class="btn-save" onclick="saveTracing()">Save</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== GALLERY ===== -->
+      <section id="page-gallery" class="page">
+        <div class="page-header">
+          <button class="btn-back" onclick="navigate('page-home')">
+            ← back
+          </button>
+          <h2>My Gallery</h2>
+          <button class="btn-secondary btn-sm" onclick="clearGallery()">
+            ✕ Clear All
+          </button>
+        </div>
+
+        <div class="gallery-container">
+          <p class="gallery-intro">Your traced characters live here</p>
+
+          <div class="gallery-tabs">
+            <button
+              class="tab-btn active"
+              onclick="showGalleryScript('hiragana', this)"
+            >
+              ひらがな
+            </button>
+            <button
+              class="tab-btn"
+              onclick="showGalleryScript('katakana', this)"
+            >
+              カタカナ
+            </button>
+            <button class="tab-btn" onclick="showGalleryScript('words', this)">
+              単語
+            </button>
+          </div>
+
+          <div class="gallery-grid" id="gallery-grid"></div>
+
+          <p class="gallery-empty" id="gallery-empty">
+            No tracings saved yet <br /><small>Go trace some characters!</small>
+          </p>
+        </div>
+      </section>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/vocab.js"></script>
+    <script src="js/trace.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
