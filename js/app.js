@@ -130,6 +130,7 @@ function renderGallery() {
     for (let i = 0; i < localStorage.length; i++) {
       const key = localStorage.key(i);
       if (!key.startsWith("tracing_words_")) continue;
+      if (key.endsWith("_emotion") || key.endsWith("_photo")) continue;
       const word = key.replace("tracing_words_", "");
       const data = localStorage.getItem(key);
       count++;
@@ -137,7 +138,8 @@ function renderGallery() {
       cell.className = "gallery-cell";
       cell.innerHTML = `
         <div class="gc-char" style="font-size:1.1rem">${word}</div>
-        <img class="gc-img" src="${data}" alt="${word}" />
+        <img class="gc-img" src="${data}" alt="${word}" data-key="${key}" data-char="${word}" />
+        ${emotionBadgeHTML(key)}
         <button class="gc-retrace" onclick="navigate('page-trace'); setTimeout(()=>selectWordByKanji('${word}'),500)">✒ Retrace</button>
         <button class="gc-delete" onclick="deleteTracing('words','${word}', this)">✕</button>
       `;
@@ -154,8 +156,9 @@ function renderGallery() {
       cell.className = "gallery-cell";
       cell.innerHTML = `
         <div class="gc-char">${item.char}</div>
-        <img class="gc-img" src="${data}" alt="${item.romaji}" />
+        <img class="gc-img" src="${data}" alt="${item.romaji}" data-key="${key}" data-char="${item.char}" />
         <div class="gc-romaji">${item.romaji}</div>
+        ${emotionBadgeHTML(key)}
         <button class="gc-retrace" onclick="navigate('page-trace'); setTimeout(()=>selectCharByChar('${item.char}','${galleryScript}'),500)">✒ Retrace</button>
         <button class="gc-delete"  onclick="deleteTracing('${galleryScript}','${item.char}', this)">✕</button>
       `;
@@ -164,10 +167,64 @@ function renderGallery() {
   }
 
   empty.style.display = count === 0 ? "block" : "none";
+
+  grid.querySelectorAll('.gc-emotion-badge').forEach(badge => {
+    badge.addEventListener('click', () => openEmotionModal(badge.dataset.emotionKey));
+  });
+  grid.querySelectorAll('.gc-img').forEach(img => {
+    img.addEventListener('click', () => openGalleryPhotoModal(img.dataset.key, img.dataset.char, img.src));
+  });
+}
+
+function emotionBadgeHTML(storageKey) {
+  const raw = localStorage.getItem(storageKey + '_emotion');
+  if (!raw) return '';
+  try {
+    const { key } = JSON.parse(raw);
+    const data = window.EMOTION_DATA && window.EMOTION_DATA[key];
+    if (!data) return '';
+    return `<div class="gc-emotion-badge" data-emotion-key="${key}" style="background:${data.colors.acc};color:${data.colors.bg}">${data.jp} ${data.en}</div>`;
+  } catch { return ''; }
+}
+
+function openEmotionModal(key) {
+  const data = window.EMOTION_DATA && window.EMOTION_DATA[key];
+  if (!data) return;
+  document.getElementById('em-jp').textContent   = data.jp;
+  document.getElementById('em-en').textContent   = data.en;
+  document.getElementById('em-desc').textContent = data.description;
+  document.getElementById('em-cues').innerHTML   = data.facialCues.map(c => `<li>${c}</li>`).join('');
+  document.getElementById('em-states').innerHTML = data.states.map(s => `<span class="em-state-chip">${s}</span>`).join('');
+  const modal = document.getElementById('emotion-modal');
+  modal.style.setProperty('--em-acc', data.colors.acc);
+  modal.style.setProperty('--em-bg',  data.colors.bg);
+  modal.classList.add('open');
+}
+
+function openGalleryPhotoModal(storageKey, char, tracingSrc) {
+  document.getElementById('gpm-char').textContent = char;
+  document.getElementById('gpm-tracing').src = tracingSrc;
+  const photo = localStorage.getItem(storageKey + '_photo');
+  const photoCol = document.getElementById('gpm-photo-col');
+  if (photo) { document.getElementById('gpm-photo').src = photo; photoCol.style.display = ''; }
+  else photoCol.style.display = 'none';
+  const badge = document.getElementById('gpm-emotion-badge');
+  const raw = localStorage.getItem(storageKey + '_emotion');
+  if (raw) {
+    try {
+      const { key } = JSON.parse(raw);
+      const data = window.EMOTION_DATA && window.EMOTION_DATA[key];
+      if (data) { badge.textContent = `${data.jp}  ${data.en}`; badge.style.background = data.colors.acc; badge.style.color = data.colors.bg; badge.style.display = 'inline-block'; }
+    } catch { badge.style.display = 'none'; }
+  } else badge.style.display = 'none';
+  document.getElementById('gallery-photo-modal').classList.add('open');
 }
 
 function deleteTracing(script, char, btn) {
-  localStorage.removeItem(`tracing_${script}_${char}`);
+  const key = `tracing_${script}_${char}`;
+  localStorage.removeItem(key);
+  localStorage.removeItem(key + '_emotion');
+  localStorage.removeItem(key + '_photo');
   btn.closest(".gallery-cell").remove();
   const grid = document.getElementById("gallery-grid");
   if (!grid.children.length)
@@ -182,9 +239,12 @@ function clearGallery() {
     }
   } else {
     const pool = galleryScript === "hiragana" ? HIRAGANA : KATAKANA;
-    pool.forEach((item) =>
-      localStorage.removeItem(`tracing_${galleryScript}_${item.char}`),
-    );
+    pool.forEach((item) => {
+      const key = `tracing_${galleryScript}_${item.char}`;
+      localStorage.removeItem(key);
+      localStorage.removeItem(key + '_emotion');
+      localStorage.removeItem(key + '_photo');
+    });
   }
   renderGallery();
 }
