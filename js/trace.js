@@ -84,6 +84,25 @@ function renderWords() {
 function saveTracing() {
   const key = `tracing_${traceScript}_${selectedChar.char}`;
   localStorage.setItem(key, canvas.toDataURL('image/png'));
+
+  // capture photo snapshot (mirrored to match live preview)
+  const video = document.getElementById('emotion-video');
+  if (video && video.readyState >= 2) {
+    const snap = document.createElement('canvas');
+    snap.width  = video.videoWidth  || 320;
+    snap.height = video.videoHeight || 240;
+    const sctx = snap.getContext('2d');
+    sctx.translate(snap.width, 0);
+    sctx.scale(-1, 1);
+    sctx.drawImage(video, 0, 0, snap.width, snap.height);
+    localStorage.setItem(key + '_photo', snap.toDataURL('image/jpeg', 0.8));
+  }
+
+  // attach emotion
+  const em = typeof getCurrentEmotion === 'function' ? getCurrentEmotion() : null;
+  if (em) localStorage.setItem(key + '_emotion', JSON.stringify({ key: em.key, confidence: em.confidence }));
+  else localStorage.removeItem(key + '_emotion');
+
   playSound('sfx-save');
   showSaveToast();
 }
