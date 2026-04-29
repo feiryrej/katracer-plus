@@ -207,7 +207,7 @@ The emotion-aware extension adds a new dimension: learners can observe how their
 <h4>Disgust</h4>
 <table>
   <tr>
-    <td><img src="https://github.com/user-attachments/assets/8ccb21db-d57e-40cf-bc50-4a1c035ae09a" width="300"/></td>
+    <td><img src="https://github.com/user-attachments/assets/49bbe09b-3f14-4047-8900-cc7c27c7c541" width="300"/></td>
     <td><img src="https://github.com/user-attachments/assets/062e981f-ce1d-4a41-b966-26f22d212020" width="300"/></td>
     <td><img src="https://github.com/user-attachments/assets/d13ccbeb-3a9d-4a2a-b157-0ddd8d99fbcc" width="300"/></td>
   </tr>
