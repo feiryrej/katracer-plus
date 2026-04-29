@@ -234,7 +234,7 @@ The emotion-aware extension adds a new dimension: learners can observe how their
 Katracer + 感情 is a fully static, client-side web application — no backend, no build step, no API keys required.
 
 ```
-katracer-emotion/
+katracer-plus/
 ├── index.html              # All pages: Home, Trace, Gallery, Photobooth
 ├── css/
 │   └── style.css           # All styles including emotion overlay & photobooth
@@ -275,8 +275,8 @@ No installation or build step needed — runs entirely in the browser.
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/<your-username>/katracer-emotion.git
-   cd katracer-emotion
+   git clone https://github.com/feiryrej/katracer-plus.git
+   cd katracer-plus
    ```
 
 2. **Serve with a local static server** (required for webcam + ES modules)
