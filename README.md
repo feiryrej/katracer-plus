@@ -6,7 +6,7 @@
 Kana Handwriting Practice with Emotion Detection<br>
 Trace Hiragana, Katakana & JLPT Vocabulary — and See How You Feel Doing It
 
-[**Technical Paper »**](https://drive.google.com/file/d/1xZnKCNjFqYkBxLtdDU1YNwnDbUTTzqNK/view?usp=sharing)
+[**Technical Paper »**](https://drive.google.com/file/d/1ZZjHseK-33aWOgnmCMuMUR4vonNSZxpk/view?usp=drive_link)
 
 [Report Bug](https://github.com/feiryrej/katracer-plus/issues)
 ·
