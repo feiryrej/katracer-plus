@@ -48,6 +48,12 @@
             >
               My Gallery
             </button>
+            <button
+              class="btn-main btn-outline"
+              onclick="navigate('page-photobooth')"
+            >
+              Emotion Photobooth
+            </button>
           </div>
         </div>
       </section>
@@ -129,6 +135,23 @@
                 <button class="btn-save" onclick="saveTracing()">Save</button>
               </div>
             </div>
+
+            <!-- Right: emotion panel -->
+            <div class="emotion-panel" id="emotion-panel">
+              <div id="emotion-widget" class="emotion-widget">
+                <video id="emotion-video" autoplay muted playsinline></video>
+                <div id="emotion-label" class="emotion-label">Initializing...</div>
+              </div>
+              <div class="emotion-panel-info">
+                <div class="ep-label">DETECTED EMOTION</div>
+                <div class="ep-jp" id="ep-jp">---</div>
+                <div class="ep-en" id="ep-en">Waiting...</div>
+                <div class="ep-label" style="margin-top:12px">WHY YOUR FACE LOOKS LIKE THIS</div>
+                <ul class="ep-cues" id="ep-cues"></ul>
+                <div class="ep-label" style="margin-top:12px">ABOUT THIS EMOTION</div>
+                <p class="ep-desc" id="ep-desc">---</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -179,5 +202,118 @@
     <script src="js/vocab.js"></script>
     <script src="js/trace.js"></script>
     <script src="js/app.js"></script>
+
+    <!-- Emotion modal (gallery badge click) -->
+    <div id="emotion-modal" class="emotion-modal">
+      <div class="emotion-modal-inner">
+        <button class="emotion-modal-close" onclick="document.getElementById('emotion-modal').classList.remove('open')">✕</button>
+        <div class="emotion-modal-jp" id="em-jp"></div>
+        <div class="emotion-modal-en" id="em-en"></div>
+        <div class="emotion-modal-section-label">WHY YOUR FACE LOOKED LIKE THIS</div>
+        <ul class="emotion-modal-cues" id="em-cues"></ul>
+        <div class="emotion-modal-section-label">ABOUT THIS EMOTION</div>
+        <p class="emotion-modal-desc" id="em-desc"></p>
+        <div class="emotion-modal-section-label">EMOTIONS IN THIS FAMILY</div>
+        <div class="emotion-modal-states" id="em-states"></div>
+      </div>
+    </div>
+
+    <!-- Gallery photo modal -->
+    <div id="gallery-photo-modal" class="gallery-photo-modal">
+      <div class="gpm-inner">
+        <button class="gpm-close" onclick="document.getElementById('gallery-photo-modal').classList.remove('open')">✕</button>
+        <div class="gpm-char" id="gpm-char"></div>
+        <div class="gpm-images">
+          <div class="gpm-col">
+            <div class="gpm-col-label">Your Tracing</div>
+            <img id="gpm-tracing" src="" alt="tracing" />
+          </div>
+          <div class="gpm-col" id="gpm-photo-col">
+            <div class="gpm-col-label">You While Tracing</div>
+            <img id="gpm-photo" src="" alt="photo" />
+          </div>
+        </div>
+        <div class="gpm-emotion-badge" id="gpm-emotion-badge"></div>
+      </div>
+    </div>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+    <script type="module" src="js/emotion-init.js"></script>
+    <script type="module" src="js/photobooth-page.js"></script>
+    <!-- ===== PHOTOBOOTH PAGE ===== -->
+    <section id="page-photobooth" class="page kc-page">
+      <header class="kc-detect-header">
+        <button class="kc-btn-back" onclick="navigate('page-home')">BACK</button>
+        <div class="kc-header-title">感情フォトブース</div>
+        <div id="kc-header-emotion-tag" class="kc-header-emotion-tag">---</div>
+      </header>
+      <main class="kc-detect-main">
+        <div class="kc-cam-col">
+          <div class="kc-cam-frame">
+            <video id="pb-video" autoplay muted playsinline></video>
+            <canvas id="pb-overlay"></canvas>
+            <div class="kc-cam-corner tl"></div>
+            <div class="kc-cam-corner tr"></div>
+            <div class="kc-cam-corner bl"></div>
+            <div class="kc-cam-corner br"></div>
+            <div id="pb-cam-status" class="kc-cam-status">INITIALIZING...</div>
+          </div>
+          <div class="kc-cam-controls">
+            <div class="kc-cam-meta">
+              <span id="pb-fps">FPS --</span>
+              <span id="pb-conf">CONF --</span>
+            </div>
+            <button id="pb-capture-btn" class="kc-btn-capture" disabled>CAPTURE</button>
+          </div>
+        </div>
+        <aside class="kc-info-panel">
+          <div class="kc-panel-block">
+            <div class="kc-panel-label">DETECTED EMOTION</div>
+            <div class="kc-panel-emotion-jp" id="pb-jp">---</div>
+            <div class="kc-panel-emotion-en" id="pb-en">Waiting...</div>
+            <div class="kc-panel-intensity-bar"><div class="kc-panel-intensity-fill" id="pb-intensity-fill"></div></div>
+            <div class="kc-panel-intensity-label" id="pb-intensity-label">INTENSITY: --</div>
+          </div>
+          <div class="kc-panel-block">
+            <div class="kc-panel-label">WHY YOUR FACE LOOKS LIKE THIS</div>
+            <ul class="kc-facial-cues-list" id="pb-cues"></ul>
+          </div>
+          <div class="kc-panel-block">
+            <div class="kc-panel-label">WHEEL CLUSTER</div>
+            <div class="kc-panel-cluster" id="pb-cluster">---</div>
+            <div class="kc-panel-states" id="pb-states"></div>
+          </div>
+          <div class="kc-panel-block">
+            <div class="kc-panel-label">EMOTIONS IN THIS FAMILY</div>
+            <div class="kc-sub-emotions-list" id="pb-sub-emotions"></div>
+          </div>
+          <div class="kc-panel-block">
+            <div class="kc-panel-label">ABOUT THIS EMOTION</div>
+            <p class="kc-panel-desc-text" id="pb-desc">---</p>
+          </div>
+          <div class="kc-panel-block">
+            <div class="kc-panel-label">TYPICAL RESPONSE</div>
+            <p class="kc-panel-desc-text" id="pb-action">---</p>
+          </div>
+          <div class="kc-panel-block">
+            <div class="kc-panel-label">RECENT HISTORY</div>
+            <div class="kc-history-track" id="pb-history"></div>
+          </div>
+        </aside>
+      </main>
+      <div id="pb-snap-modal" class="kc-pb-modal">
+        <div class="kc-pb-modal-inner">
+          <div class="kc-pb-modal-header">
+            <div class="kc-pb-modal-title">EMOTION SNAPSHOT</div>
+            <button class="kc-pb-close" onclick="document.getElementById('pb-snap-modal').classList.remove('open')">CLOSE</button>
+          </div>
+          <canvas id="pb-snap-canvas"></canvas>
+          <div class="kc-pb-modal-actions">
+            <button id="pb-snap-download" class="kc-btn-brutal">DOWNLOAD PHOTO</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </body>
 </html>
