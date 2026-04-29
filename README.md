@@ -2,41 +2,61 @@
 
 <img src="assets/images/logo.png" alt="Katracer Logo" width="120" />
 
-# かなトレース
-Kana Handwriting Practice<br>
-Trace Hiragana, Katakana & JLPT Vocabulary, One Stroke at a Time
+# かなトレース+
+Kana Handwriting Practice with Emotion Detection<br>
+Trace Hiragana, Katakana & JLPT Vocabulary — and See How You Feel Doing It
 
 [**Technical Paper »**](https://drive.google.com/file/d/1xZnKCNjFqYkBxLtdDU1YNwnDbUTTzqNK/view?usp=sharing)
 
 [Report Bug](https://github.com/feiryrej/nani-level/issues)
 ·
 [Request Feature](https://github.com/feiryrej/nani-level/pulls)
-</div>
 
----
+</div>
 
 ## Demo
 
-
+<!-- TODO: insert demo GIF or screenshot here -->
 
 ---
 
 ## Overview
 
-Katracer is a browser-based Japanese kana handwriting practice tool. Users select a hiragana or katakana character or a JLPT-leveled vocabulary word and trace it freehand on an interactive canvas. Each tracing can be saved to a personal gallery stored in the browser's `localStorage`, letting learners build a visual record of their progress over time.
+**Katracer + 感情 (Kanjou)** is a browser-based Japanese kana handwriting practice tool extended with real-time facial emotion detection. Users trace hiragana, katakana, or JLPT vocabulary words on an interactive canvas while a live webcam widget detects and displays their current emotion using [face-api.js](https://github.com/vladmandic/face-api). Each saved tracing is tagged with the detected emotion and stored in the browser's `localStorage`, letting learners build a visual record of both their writing progress and their emotional state during practice.
 
-This repository is the code companion to the technical report *"Katracer: A Browser-Based Kana Handwriting Practice Application"* submitted to the Polytechnic University of the Philippines for Human-Computer Interaction (April 2026).
+The emotion feature was built by fusing two separate projects:
+- **Katracer** — the original kana handwriting practice app
+- **Kanjou-Cam** — a standalone real-time emotion detection photobooth
+
+This project is submitted for **COSC 402 Individual Activity: Emotion-Aware Prototype** at the Polytechnic University of the Philippines (April 2026).
+
+---
+
+## Why Emotion-Aware Learning?
+
+Traditional handwriting tools focus only on correctness and repetition. This system introduces emotional awareness into the learning process, allowing users to:
+
+- Reflect on how emotions affect writing performance
+- Identify frustration, boredom, or engagement during practice
+- Build a more mindful and personalized learning experience
+
+This makes かなトレース+ feel research-worthy, not just functional — bridging human-computer interaction, affective computing, and language learning into a single browser-based tool.
 
 ---
 
 ## Background
 
-Mastering the Japanese writing system requires repeated, deliberate practice of stroke order and character form. Most digital tools focus on recognition (flashcards, quizzes) rather than production. Katracer addresses this gap by providing a low-friction, aesthetically engaging canvas environment where learners can practice writing kana characters and JLPT vocabulary directly in the browser, no installation required.
+Mastering the Japanese writing system requires repeated, deliberate practice of stroke order and character form. Most digital tools focus on recognition (flashcards, quizzes) rather than production. Katracer addresses this gap by providing a low-friction, aesthetically engaging canvas environment where learners can practice writing kana characters and JLPT vocabulary directly in the browser — no installation required.
 
-### Key Features
+The emotion-aware extension adds a new dimension: learners can observe how their emotional state correlates with their practice sessions, grounded in Paul Ekman's six universal emotions plus a calm/neutral baseline.
 
-- **Trace Mode** — Freehand canvas drawing with a pink-style brush; ghost character overlay guides stroke placement
-- **Hiragana & Katakana** — Full 46-character sets with romaji labels, row groupings, and contextual word suggestions per character
+---
+
+## Key Features
+
+### Original Katracer Features
+- **Trace Mode** — Freehand canvas drawing with a ribbon-style brush; ghost character overlay guides stroke placement
+- **Hiragana & Katakana** — Full 46-character sets with romaji labels, row groupings, and contextual word suggestions
 - **Word Mode** — JLPT N5–N1 vocabulary words for advanced tracing practice, with level selector and random shuffle
 - **Gallery** — Saved tracings organized by script (hiragana / katakana / words); individual delete and full clear supported
 - **Dark / Light Theme** — Toggle between themes; ghost character opacity adapts automatically
@@ -44,124 +64,100 @@ Mastering the Japanese writing system requires repeated, deliberate practice of 
 - **Custom Cursor** — Smooth animated cursor ring with canvas-aware styling
 - **Falling Petals** — Ambient petal animation for an immersive aesthetic
 
+### New Emotion-Aware Features
+- **Live Emotion Overlay** — A mini webcam widget on the Trace page detects your face in real time and displays your current emotion (Japanese + English label) using face-api.js TinyFaceDetector
+- **Emotion Tagging on Save** — When you save a tracing, the detected emotion is stored alongside it in `localStorage`
+- **Emotion Badges in Gallery** — Each saved tracing shows a color-coded emotion badge reflecting the emotion at the time of saving
+- **Emotion Detail Modal** — Click any badge to see the full emotion profile: Japanese name, English name, description, facial cues, and sub-emotion states
+- **Gallery Photo Modal** — Click a tracing thumbnail to see the full tracing alongside the webcam snapshot and emotion badge
+- **Emotion Photobooth Page** — A dedicated page (Kanjou-Cam) for real-time emotion detection with intensity meter, facial cue breakdown, sub-emotion explorer, emotion history timeline, and downloadable emotion snapshots
+- **7 Emotion Classes** — Joy (喜び), Sadness (悲しみ), Anger (怒り), Fear (恐れ), Disgust (嫌悪), Surprise (驚き), Calm (平静) — mapped from face-api's output to a rich emotion data model
+
 ---
 
 ## Application Snapshots
 
 ### Home Page
-#### Light Mode
-<img width="1919" height="911" alt="image" src="https://github.com/user-attachments/assets/02304af9-e440-4a39-85e4-cdd354d53073" />
+<!-- TODO: insert home page screenshot -->
 
-#### Dark Mode
-<img width="1919" height="910" alt="image" src="https://github.com/user-attachments/assets/6dc69b18-40da-44e9-b408-b7136fa1c995" />
+### Trace Page with Emotion Overlay
+<!-- TODO: insert trace page screenshot showing the live emotion widget -->
 
-### Trace Mode
-#### Light Mode
-- Hiragana
-<img width="1919" height="911" alt="image" src="https://github.com/user-attachments/assets/937b1b60-5770-4663-bc22-8b71a1976c37" />
+### Gallery with Emotion Badges
+<!-- TODO: insert gallery screenshot showing emotion-tagged tracings -->
 
-- Katakana
-<img width="1919" height="909" alt="image" src="https://github.com/user-attachments/assets/3e553e78-56b7-4066-8e6c-8897bb851f19" />
+### Emotion Detail Modal
+<!-- TODO: insert emotion modal screenshot -->
 
-- Words
-<img width="1918" height="909" alt="image" src="https://github.com/user-attachments/assets/c99f9de2-eddf-4b05-a560-aa05080e29a0" />
-
-#### Dark Mode
-- Hiragana
-<img width="1917" height="907" alt="image" src="https://github.com/user-attachments/assets/4c3b0957-06c5-4ab0-b1b1-7045a821f808" />
-
-- Katakana
-<img width="1919" height="907" alt="image" src="https://github.com/user-attachments/assets/8314c820-4bcb-45d3-a641-0078ac0051fb" />
-
-- Words
-<img width="1919" height="908" alt="image" src="https://github.com/user-attachments/assets/f769aad3-88a1-47ca-8918-2c9a24a83ccd" />
-
-### Gallery
-#### Light Mode
-<img width="1918" height="911" alt="image" src="https://github.com/user-attachments/assets/73957935-e84a-40d7-a921-1e51f59754f5" />
-<img width="1919" height="912" alt="image" src="https://github.com/user-attachments/assets/d0de5e32-cb67-4fa1-8643-6a626d313810" />
-<img width="1919" height="905" alt="image" src="https://github.com/user-attachments/assets/824bc562-2781-4a0f-a393-1db8dc15e44c" />
-
-
-
-#### Dark Mode
-<img width="1919" height="906" alt="image" src="https://github.com/user-attachments/assets/ed389b88-1879-49e4-bd5f-d8a90b625e8e" />
-<img width="1919" height="908" alt="image" src="https://github.com/user-attachments/assets/b5c5978d-1b21-4c73-855e-b3a82ce4809e" />
-<img width="1919" height="901" alt="image" src="https://github.com/user-attachments/assets/08a6bbab-6bf8-4347-8f93-b663f1355499" />
-
+### Emotion Photobooth (Kanjou-Cam)
+<!-- TODO: insert photobooth page screenshot -->
 
 ---
 
 ## System Architecture
 
-Katracer is a fully static, client-side web application — no backend or build step required.
-
-**`index.html`** defines the three-page layout (Home, Trace, Gallery) and loads all assets.
-
-**`js/data.js`** contains the complete hiragana and katakana datasets, each character annotated with romaji, row group, and example vocabulary words.
-
-**`js/vocab.js`** holds the JLPT N1–N5 vocabulary lists used in Word Mode.
-
-**`js/trace.js`** manages the canvas: ribbon-style drawing, ghost character rendering, character/word selection, and save-to-gallery logic.
-
-**`js/app.js`** handles navigation transitions, dark mode, music, the custom cursor, petal animation, and gallery rendering.
-
----
-
-## Project Structure
+Katracer + 感情 is a fully static, client-side web application — no backend, no build step, no API keys required.
 
 ```
-katracer/
-├── assets/
-│   ├── images/
-│   │   ├── logo.png
-│   │   ├── cursor.png
-│   │   ├── moon.png / sun.png
-│   │   ├── note.png / notes.png
-│   │   └── light.jpg / dark.jpg
-│   └── sounds/
-│       └── bgm.mp3
+katracer-emotion/
+├── index.html              # All pages: Home, Trace, Gallery, Photobooth
 ├── css/
-│   └── style.css
+│   └── style.css           # All styles including emotion overlay & photobooth
 ├── js/
-│   ├── data.js       # Hiragana & katakana datasets
-│   ├── vocab.js      # JLPT N1–N5 vocabulary
-│   ├── trace.js      # Canvas drawing & character logic
-│   └── app.js        # UI, navigation, theme, gallery
-└── index.html
+│   ├── data.js             # Hiragana & katakana datasets (char, romaji, words)
+│   ├── vocab.js            # JLPT N1–N5 vocabulary lists
+│   ├── trace.js            # Canvas drawing, ghost character, save-to-gallery
+│   ├── app.js              # Navigation, dark mode, music, gallery rendering,
+│   │                       #   emotion badge HTML, gallery/emotion modals
+│   ├── emotions.js         # Emotion data model: 7 emotions × (jp, en, colors,
+│   │                       #   facialCues, states, subEmotions, description)
+│   ├── detector.js         # face-api.js model loading & single-frame detection
+│   ├── camera.js           # Webcam start/stop and overlay canvas sync
+│   ├── emotion-overlay.js  # Live emotion widget on the Trace page (mini cam loop)
+│   ├── emotion-init.js     # Module entry: exposes emotion globals, patches navigate()
+│   └── photobooth-page.js  # Full Kanjou-Cam photobooth page logic
+└── assets/
+    ├── images/             # logo, cursor, moon/sun, note/notes, light/dark bg
+    └── sounds/
+        └── bgm.mp3         # Ambient background music
 ```
+
+### How the Emotion Pipeline Works
+
+1. **`detector.js`** loads two face-api.js models from CDN (`tinyFaceDetector` + `faceExpressionNet`) and exposes `detectOnce(videoEl)` which returns the dominant emotion and confidence score.
+2. **`emotion-overlay.js`** runs a 600 ms polling loop on the Trace page, calling `detectOnce` and updating the mini overlay label and the emotion panel with the current emotion's data from `emotions.js`.
+3. **`photobooth-page.js`** runs a `requestAnimationFrame` loop on the Photobooth page, calling `detectOnce` and updating the full Kanjou-Cam UI (intensity bar, facial cues, sub-emotions, history dots).
+4. **`app.js`** reads `window.getCurrentEmotion()` at save time and writes `{ key, data, confidence }` to `localStorage` under `<tracing-key>_emotion`. It also reads this on gallery render to produce emotion badges and modals.
+5. **`emotion-init.js`** patches `window.navigate` to start/stop the overlay when entering/leaving the Trace page, and exposes `EMOTION_DATA` and `getCurrentEmotion` globally.
 
 ---
 
 ## Setup and Usage
 
-No installation or build step needed — Katracer runs entirely in the browser.
+No installation or build step needed — runs entirely in the browser.
 
 ### Run Locally
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/<your-username>/katracer.git
-   cd katracer
+   git clone https://github.com/<your-username>/katracer-emotion.git
+   cd katracer-emotion
    ```
 
-2. **Open in browser**
-
-   Simply open `index.html` in any modern browser:
-   ```bash
-   # macOS / Linux
-   open index.html
-
-   # Windows
-   start index.html
-   ```
-
-   Or serve it with any static file server:
+2. **Serve with a local static server** (required for webcam + ES modules)
    ```bash
    npx serve .
+   # or
+   python -m http.server 8080
    ```
 
-> No dependencies, no build tools, no API keys required.
+3. **Open in browser**
+   ```
+   http://localhost:3000
+   ```
+### Webcam Permission
+
+The emotion overlay and photobooth require webcam access. Grant permission when the browser prompts. If the camera is unavailable, the overlay shows "Cam unavailable" and tracing still works normally without emotion tagging.
 
 ---
 
@@ -170,11 +166,30 @@ No installation or build step needed — Katracer runs entirely in the browser.
 | Step | Action |
 |------|--------|
 | 1 | Click **Start Tracing** from the home page |
-| 2 | Select **Hiragana**, **Katakana**, or **Words** tab |
-| 3 | Pick a character (or select a JLPT level in Word Mode) |
-| 4 | Trace the ghost character on the canvas |
-| 5 | Click **Save** to store your tracing in the Gallery |
-| 6 | Visit **My Gallery** to review all saved tracings |
+| 2 | Allow webcam access when prompted |
+| 3 | Select **Hiragana**, **Katakana**, or **Words** tab |
+| 4 | Pick a character or JLPT word — the emotion overlay activates automatically |
+| 5 | Trace the ghost character; your current emotion is shown live in the overlay panel |
+| 6 | Click **Save** — the tracing is stored with your detected emotion |
+| 7 | Visit **My Gallery** to review tracings with their emotion badges |
+| 8 | Click a badge to see the full emotion profile; click a tracing to see the photo modal |
+| 9 | Visit **Photobooth** for the full Kanjou-Cam emotion detection experience |
+
+---
+
+## Emotion Classes
+
+| face-api output | Japanese | English | Cluster |
+|-----------------|----------|---------|---------|
+| `happy` | 喜び | Joy | JOY |
+| `sad` | 悲しみ | Sadness | SADNESS |
+| `angry` | 怒り | Anger | ANGER |
+| `fearful` | 恐れ | Fear | FEAR |
+| `disgusted` | 嫌悪 | Disgust | DISGUST |
+| `surprised` | 驚き | Surprise | SURPRISE |
+| `neutral` | 平静 | Calm | CALM |
+
+Each emotion includes: description, facial cues, intensity states, sub-emotions, and a recommended action — based on Paul Ekman's Atlas of Emotions framework.
 
 ---
 
@@ -192,9 +207,9 @@ No installation or build step needed — Katracer runs entirely in the browser.
   <tbody>
     <tr>
       <td>Regina S. Bonifacio</td>
-      <td><img src="https://github.com/user-attachments/assets/8caf5539-c233-4cc0-a203-36226d033474" width="48" style="border-radius:50%" /></td>
+      <td><!-- TODO: insert avatar --></td>
       <td><a href="https://github.com/feiryrej">feiryrej</a></td>
-      <td><strong>Developer & Researcher</strong>: Full development of Katracer, including UI/UX design, canvas drawing engine, kana dataset curation, JLPT vocabulary integration, gallery system, theme and audio features, and technical report writing.</td>
+      <td><strong>Developer & Researcher</strong>: Full development of Katracer (UI/UX, canvas engine, kana dataset, JLPT vocabulary, gallery, theme, audio) and the emotion-aware extension (face-api integration, emotion overlay, photobooth page, emotion tagging, gallery modals, emotion data model).</td>
     </tr>
   </tbody>
 </table>
@@ -202,6 +217,8 @@ No installation or build step needed — Katracer runs entirely in the browser.
 ---
 
 ## References
+
+Ekman, P. (2003). *Emotions revealed: Recognizing faces and feelings to improve communication and emotional life*. Times Books.
 
 Japan Foundation. (2023). *Japanese-Language Proficiency Test (JLPT): About the JLPT*. https://www.jlpt.jp/e/about/levelsummary.html
 
@@ -211,4 +228,6 @@ Nielsen, J. (1994). *Usability engineering*. Morgan Kaufmann.
 
 Norman, D. A. (2013). *The design of everyday things* (Revised ed.). Basic Books.
 
-[[Back to top](#かなトレース--katracer)]
+Vladmandic. (2024). *face-api.js*. GitHub. https://github.com/vladmandic/face-api
+
+[[Back to top](#かなトレース)]
