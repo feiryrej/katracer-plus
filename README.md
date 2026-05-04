@@ -148,7 +148,7 @@ The emotion-aware extension adds a new dimension: learners can observe how their
 <table>
   <tr>
     <td><img src="https://github.com/user-attachments/assets/fdf988c2-df1f-4ee1-9656-4e4eec26cf3d" width="300"/></td>
-    <td><img src="https://github.com/user-attachments/assets/c7a3cb1f-1ef9-4e67-9cb4-52688522466f" width="300"/></td>
+    <td><img src="https://github.com/user-attachments/assets/d0b722e1-9d08-4655-872a-fef4ddb143ff" width="300"/></td>
     <td><img src="https://github.com/user-attachments/assets/1ff9333a-8665-4066-89a4-1658916fc242" width="300"/></td>
   </tr>
 </table>
@@ -161,7 +161,7 @@ The emotion-aware extension adds a new dimension: learners can observe how their
   <tr>
     <td><img src="https://github.com/user-attachments/assets/f9761818-d48b-4477-9f51-7a433dea5ec5" width="300"/></td>
     <td><img src="https://github.com/user-attachments/assets/65899930-dc54-4db6-b60b-c4822608c1d3" width="300"/></td>
-    <td><img src="https://github.com/user-attachments/assets/8859d559-1d98-4370-ae4f-df28ed6ee437" width="300"/></td>
+    <td><img src="https://github.com/user-attachments/assets/4b61f652-7517-4060-aa16-4ece56d170d9" width="300"/></td>
   </tr>
 </table>
 
@@ -220,7 +220,7 @@ The emotion-aware extension adds a new dimension: learners can observe how their
 <table>
   <tr>
     <td><img src="https://github.com/user-attachments/assets/952e1d27-13bc-4e51-b504-5b60997eb219" width="300"/></td>
-    <td><img src="https://github.com/user-attachments/assets/4558681c-e09f-4093-a5ef-71b8b2809081" width="300"/></td>
+    <td><img src="https://github.com/user-attachments/assets/117a4159-f40d-4d93-8017-db42ee22785e" width="300"/></td>
     <td><img src="https://github.com/user-attachments/assets/30f72e38-b83c-4cb0-a8a4-8606e4fd0056" width="300"/></td>
   </tr>
 </table>
