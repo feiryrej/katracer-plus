@@ -944,7 +944,7 @@ body.dark .word-mode-controls select {
   --kc-font-mono: 'Space Mono', monospace;
   --kc-font-jp:   'Noto Sans JP', sans-serif;
 }
-.kc-page { flex-direction: column; background: var(--kc-em-bg); transition: background 1.2s ease; position: fixed; inset: 0; overflow: hidden; display: flex; }
+.kc-page { flex-direction: column; background: var(--kc-em-bg); transition: background 1.2s ease; position: fixed; inset: 0; overflow: hidden; display: flex; padding-bottom: 0; }
 .kc-detect-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 24px; border-bottom: var(--kc-thick) solid var(--kc-black); background: rgba(245,240,235,0.85); backdrop-filter: blur(4px); flex-shrink: 0; z-index: 10; }
 .kc-btn-back { font-family: var(--kc-font-mono); font-size: 0.7rem; letter-spacing: 0.15em; padding: 6px 14px; background: transparent; border: var(--kc-thick) solid var(--kc-black); cursor: pointer; box-shadow: 3px 3px 0 var(--kc-black); transition: transform 0.1s, box-shadow 0.1s; }
 .kc-btn-back:hover { transform: translate(-1px,-1px); box-shadow: 4px 4px 0 var(--kc-black); }
