@@ -14,11 +14,6 @@ Trace Hiragana, Katakana & JLPT Vocabulary — and See How You Feel Doing It
 
 </div>
 
-## Demo
-
-<!-- TODO: insert demo GIF here (tomorrow sa klase) -->
----
-
 ## Overview
 
 **Katracer + 感情 (Kanjou)** is a browser-based Japanese kana handwriting practice tool extended with real-time facial emotion detection. Users trace hiragana, katakana, or JLPT vocabulary words on an interactive canvas while a live webcam widget detects and displays their current emotion using [face-api.js](https://github.com/vladmandic/face-api). Each saved tracing is tagged with the detected emotion and stored in the browser's `localStorage`, letting learners build a visual record of both their writing progress and their emotional state during practice.
